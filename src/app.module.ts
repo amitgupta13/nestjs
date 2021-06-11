@@ -4,10 +4,13 @@ import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
+import { HealthController } from './health/health.controller';
+import { TerminusModule } from '@nestjs/terminus';
 
 @Module({
   imports: [
     TasksModule,
+    TerminusModule,
     ConfigModule.forRoot({
       envFilePath: [`.env`],
       validationSchema: configValidationSchema,
@@ -45,5 +48,6 @@ import { configValidationSchema } from './config.schema';
     }),
     AuthModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}
